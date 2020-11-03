@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+    {% include "inc/navbar.html.twig" %}
+{% endblock %}
+{% block title %}
+	Les sorties
+{% endblock %}
+{% block header %}
+	{% include "inc/header.html.twig" %}
+{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col-6 text-center">
+			Nom de la sortie : <br>
+            Date de la sortie : <br>
+            Date limite d'inscription :<br>
+            Nombre de place :<br>
+            Durée : <br>
+            Description :<br>
+		</div>
+		<div class="col-6 text-center">
+			Campus :<br>
+            Lieu : <br>
+            Rue :<br>
+            Code postal :<br>
+            Latitude :<br>
+            Longitude :<br>
+		</div>
+	</div>
+    Liste des inscrits : <br>
+    <table class="table table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Nom de la sortie</th>
+				<th scope="col">Date de la sortie</th>
+				<th scope="col">Clôture</th>
+				<th scope="col">inscrits/places</th>
+				<th scope="col">Etat</th>
+				<th scope="col">Inscrit</th>
+				<th scope="col">Organisateur</th>
+				<th scope="col">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">1</th>
+				<td>Mark</td>
+				<td>Otto</td>
+				<td>@mdo</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>Jacob</td>
+				<td>Thornton</td>
+				<td>@fat</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td>Larry</td>
+				<td>the Bird</td>
+				<td>@twitter</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}

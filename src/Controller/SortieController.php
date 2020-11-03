@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends AbstractController
+
+class SortieController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/sortie", name="sortie")
      */
-    public function home(): Response
+    public function sortie(): Response
     {
         $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
         $sorties = $sortieRepo->findAllOrderByCampus();
-        
-        return $this->render('default/home.html.twig', [
-            'controller_name' => 'DefaultController',
-            'sorties'=>$sorties,
-            'user'=>$this->getUser()
+        dump($sorties);
+        die;
+        return $this->render('sortie/index.html.twig', [
+            'controller_name' => 'SortieController',
+            'title' => 'le nom de la sortie',
         ]);
-        
     }
 }
