@@ -1,0 +1,19 @@
+security:
+    providers:
+        our_db_provider:
+            entity:
+                class: App\Entity\Participant
+                property: mail
+    firewalls:
+        main:
+            pattern: ^/
+            provider: our_db_provider
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            logout_on_user_change: true
+
+    encoders:
+        App\Entity\Participant:
+            algorithm: bcrypt

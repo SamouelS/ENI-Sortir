@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% include "inc/navbar.html.twig" %}
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    {{ form_start(registerForm) }}
+    {{ form_widget(registerForm) }}
+    <button type="submit">S'inscrire</button>
+    {{ form_end(registerForm) }}
+{% endblock %}
