@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% include "inc/navbar.html.twig" %}
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="post">
+        <label for="mail">Adresse e-mail:</label>
+        <input type="email" name="_username" id="mail">
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" name="_password" id="password">
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Se souvenir de moi
+            </label>
+        </div>
+
+        <button type="submit">Se connecter</button>
+    </form>
+{% endblock %}

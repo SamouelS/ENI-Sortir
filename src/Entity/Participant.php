@@ -165,12 +165,12 @@ class Participant implements UserInterface
 
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+       return ["ROLE_USER"];
     }
 
     public function getPassword()
     {
-        // TODO: Implement getPassword() method.
+        return $this->pass;
     }
 
     public function getSalt()
@@ -180,13 +180,12 @@ class Participant implements UserInterface
 
     public function getUsername()
     {
-        // TODO: Implement getUsername() method.
+        return $this->getMail();
     }
 
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
     }
-
 
 }
