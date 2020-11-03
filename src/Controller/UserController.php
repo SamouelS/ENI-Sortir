@@ -38,6 +38,11 @@ class UserController extends AbstractController
             $user->setActif(1);
             $em->persist($user);
             $em->flush();
+
+            $this->addFlash('success', 'Votre compte à bien été enregistré.');
+            $this->redirectToRoute('login');
+        } else {
+            $this->addFlash('error', 'Votre compte n\'a pas été enregistré.');
         }
         return $this->render("user/register.html.twig", [
             "registerForm" => $registerForm->createView()
