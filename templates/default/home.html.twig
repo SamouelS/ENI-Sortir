@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+	{% include "inc/navbar.html.twig" %}
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+
+	<form class="form">
+		<div class="row">
+			<div class="col-6">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">Campus</div>
+					</div>
+					<select class="custom-select" id="inputGroupSelect01">
+						<option selected>Choose...</option>
+						<option value="1">One</option>
+						<option value="2">Two</option>
+						<option value="3">Three</option>
+					</select>
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							Le nom de la sortie contient :
+						</div>
+					</div>
+					<input type="text" class="form-control" placeholder="search">
+				</div>
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							Entre
+						</div>
+					</div>
+					<input type="date" class="form-control">
+
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							et
+						</div>
+					</div>
+					<input type="date" class="form-control">
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="input-group">
+					<label><input type="checkbox" name="" id="1" value="Option1">
+						Option1</label>
+				</div>
+				<div class="input-group">
+					<label><input type="checkbox" name="" id="1" value="Option1">
+						Option1</label>
+				</div>
+				<div class="input-group">
+					<label><input type="checkbox" name="" id="1" value="Option1">
+						Option1</label>
+				</div>
+				<div class="input-group">
+					<label><input type="checkbox" name="" id="1" value="Option1">
+						Option1</label>
+				</div>
+			</div>
+		</div>
+
+
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
+	<table class="table table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">Nom de la sortie</th>
+				<th scope="col">Date de la sortie</th>
+				<th scope="col">Clôture</th>
+				<th scope="col">inscrits/places</th>
+				<th scope="col">Etat</th>
+				<th scope="col">Inscrit</th>
+				<th scope="col">Organisateur</th>
+				<th scope="col">Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row">1</th>
+				<td>Mark</td>
+				<td>Otto</td>
+				<td>@mdo</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>Jacob</td>
+				<td>Thornton</td>
+				<td>@fat</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td>Larry</td>
+				<td>the Bird</td>
+				<td>@twitter</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}
