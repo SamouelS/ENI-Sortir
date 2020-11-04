@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
- * @UniqueEntity(fields={"mail"},message="Cet adresse email a déjà été utilisée")
+ * @UniqueEntity(fields={"mail"},message="Cette adresse email a déjà été utilisée")
  */
 class Participant implements UserInterface
 {
@@ -59,6 +59,11 @@ class Participant implements UserInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\Campus", cascade={"persist"})
      */
     private $campus;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
 
     public function getId(): ?int
     {
@@ -168,6 +173,22 @@ class Participant implements UserInterface
     public function getRoles()
     {
        return ["ROLE_USER"];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     */
+    public function setAvatar($avatar): void
+    {
+        $this->avatar = $avatar;
     }
 
     public function getPassword()
