@@ -89,10 +89,10 @@
 				<td>{{sortie.dateLimiteInscription|date('Y-m-d')}}</td>
 				<td>{{sortie.nbInscriptionsMax}}</td>
 				<td>{{sortie.etat.libelle}}</td>
-				{% if user.id == sortie.organisateur.id %}
-					<td><span class="oi oi-check"></span></td>
+				{% if app.user in sortie.participants %}
+					<td><a href="{{path('sortie_unsubscribe', {'idSortie': sortie.id, 'idParticipant': app.user.id} )}}"><span class="oi oi-check"></span></a></td>
 				{% else %}
-					<td></td>
+					<td><a href="{{path('sortie_register', {'idSortie': sortie.id, 'idParticipant': app.user.id} )}}"><span class="oi oi-x"></span></a></td>
 				{% endif %}
 					
 				<td>{{sortie.organisateur.nom}}</td>

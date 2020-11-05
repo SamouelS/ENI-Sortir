@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/sortie/{id}", name="sortie_detail")
+     * @Route("/sortie/{id}", name="sortie_detail", requirements={"id": "\d+"})
      */
     public function datail($id): Response
     {
@@ -44,5 +45,35 @@ class SortieController extends AbstractController
         return $this->render('sortie/add.html.twig', [
             "form" => $form->createView()
         ]);
+    }
+    /**
+     * @Route("/sortie/register/{idSortie}/{idParticipant}", name="sortie_register", requirements={"idSortie": "\d+","idParticipant": "\d+"})
+     */
+    public function register($idSortie, $idParticipant, EntityManagerInterface $em): Response
+    {
+        $particiapantRepo = $this->getDoctrine()->getRepository(Participant::class);
+        $participant = $particiapantRepo->find($idParticipant);
+        $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($idSortie);
+        $sortie->getParticipants()->add($participant);
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute("home");
+    }
+    /**
+     * @Route("/sortie/unsubscribe/{idSortie}/{idParticipant}", name="sortie_unsubscribe", requirements={"idSortie": "\d+","idParticipant": "\d+"})
+     */
+    public function unsubscribe($idSortie, $idParticipant, EntityManagerInterface $em): Response
+    {
+        $particiapantRepo = $this->getDoctrine()->getRepository(Participant::class);
+        $participant = $particiapantRepo->find($idParticipant);
+        $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($idSortie);
+        $sortie->removeParticipant($participant);
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute("home");
     }
 }

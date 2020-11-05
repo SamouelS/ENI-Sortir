@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SortieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -70,7 +71,11 @@ class Sortie
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Participant", cascade={"persist"})
      */
-    private $participant;
+    private $participants;
+
+    public function __construct(){
+        $this->participants = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -216,18 +221,29 @@ class Sortie
     /**
      * @return mixed
      */
-    public function getParticipant()
+    public function getParticipants()
     {
-        return $this->participant;
+        return $this->participants;
     }
 
     /**
      * @param mixed $participant
      */
-    public function setParticipant($participant): void
+    public function setParticipants($participants): void
     {
-        $this->participant = $participant;
+        $this->participants = $participants;
     }
 
+    public function isParticipant($user){
 
+        return $this->participants->contains($user);
+
+    }
+    public function removeParticipant($participant)
+    {
+        if ($this->participants->contains($participant)) {
+            $this->participants->removeElement($participant);
+        }
+        
+    }
 }
