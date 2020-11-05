@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+    {% include "inc/navbar.html.twig" %}
+{% endblock %}
+{% block title %}
+	Les sorties
+{% endblock %}
+{% block header %}
+	{% include "inc/header.html.twig" %}
+{% endblock %}
+{% block content %}
+    Nom : {{sortie.nom}}<br>
+    Date : {{sortie.dateHeureDebut | date('d/m/Y')}}
+{% endblock %}
