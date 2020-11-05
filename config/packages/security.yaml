@@ -15,7 +15,7 @@ security:
             logout_on_user_change: true
             logout:
                 path: logout
-                target: home
+                target: login
 
             remember_me:
                 secret: '%kernel.secret%'

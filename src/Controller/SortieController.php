@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/sortie/{id}", name="sortie_detail")
+     * @Route("/sortie/{id}", name="sortie_detail", requirements={"id": "\d+"})
      */
     public function datail($id): Response
     {
