@@ -106,8 +106,16 @@ class UserController extends AbstractController
                 $user->setAvatar($newFilename);
             }
 
-            $hashed = $encoder->encodePassword($user, $user->getPass());
-            $user->setPass($hashed);
+            if(!is_null($profileForm->get('pass')->getData())) {
+                if ($encoder->isPasswordValid($user, $profileForm->get('oldPassword')->getData())) {
+                    $newEncodedPassword = $encoder->encodePassword($user, $profileForm->get('pass')->getData());
+                    $user->setPass($newEncodedPassword);
+                } else {
+                    $this->addFlash('danger', 'Votre ancien mot de passe n\'est pas le bon');
+                    return $this->redirectToRoute('user_profile_edit');
+                }
+            }
+
             $em->persist($user);
             $em->flush();
 
