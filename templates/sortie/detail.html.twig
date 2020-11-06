@@ -9,27 +9,6 @@
 	{% include "inc/header.html.twig" %}
 {% endblock %}
 {% block content %}
-    {#
-    <h1>
-        {{ sortie.getNom() }}
-        <small class="text-muted">(0/{{ sortie.getNbInscriptionsMax() }})</small>
-    </h1>
-    <h5>
-        Organisée par : <a href="{{ path('user_profile', {id: sortie.getOrganisateur().getId()}) }}" title="Voir le profil de {{ sortie.getOrganisateur().getPrenom() }} {{ sortie.getOrganisateur().getNom()|upper }}"> {{ sortie.getOrganisateur().getPrenom() }} {{ sortie.getOrganisateur().getNom()|upper }}</a>
-        {% if sortie.getOrganisateur().getId() == app.user.id %}
-            <small class="text-muted">(c'est vous !)</small>
-        {% endif %}
-    </h5>
-    <hr />
-    <div>{{ sortie.getInfosSortie() }}</div>
-    <div>Clôture des inscriptions : {{ sortie.getDateLimiteInscription()| date('d/m/Y à H:i') }}</div>
-    <div>Nombre de places : {{ sortie.getNbInscriptionsMax() }}</div>
-    <div>Date de la sortie : {{ sortie.getDateHeureDebut()|date('d/m/Y à H:i') }}</div>
-    <div>Lieu : {{ sortie.getLieu().getNom() }} à {{ sortie.getLieu().getRue() }} {{ sortie.getLieu().getVille().getNom() }} ({{ sortie.getLieu().getVille().getCp() }})</div>
-    <div>Latitude: {{ sortie.getLieu().getLatitude() }}</div>
-    <div>Longitude: {{ sortie.getLieu().getLongitude() }}</div>
-    <div>Campus : {{ sortie.getCampus().getNom() }}</div>
-    #}
         <h1>
             {{ sortie.getNom() }}
             <small class="text-muted">(0/{{ sortie.getNbInscriptionsMax() }} participants)</small>
@@ -43,7 +22,6 @@
         <hr />
     <div class="text-center">
         <div class="bg-detail  text-left">
-
             <div class="row mb-4">
                 <div class="col-md-4">
                     <span class="font-weight-bold">Date de la sortie</span>

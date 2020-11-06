@@ -27,7 +27,12 @@
                                         {% endif %}
                                     </div>
                                     <div class="userData ml-3">
-                                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">{{ user.getPrenom() }} {{ user.getNom()|upper }}</a></h2>
+                                        <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold">
+                                            <a href="javascript:void(0);">{{ user.getPrenom() }} {{ user.getNom()|upper }}</a>
+                                            {% if user.getAdministrateur() == 1 %}
+                                                <span class="badge badge-danger">Administrateur</span>
+                                            {% endif %}
+                                        </h2>
                                         <h6 class="d-block"><a href="javascript:void(0)">0</a> sorties organisées</h6>
                                         <h6 class="d-block"><a href="javascript:void(0)">0</a> sorties participées</h6>
                                         <hr />

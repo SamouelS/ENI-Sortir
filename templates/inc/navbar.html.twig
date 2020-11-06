@@ -9,12 +9,19 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{ path("home") }}">Accueil</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Ville</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Campus</a>
-			</li>
+			{% if user is defined %}
+				{% for role in user.roles %}
+					{% if role == "ROLE_ADMIN" %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path("admin_ville") }}">Ville</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path("admin_campus") }}">Campus</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+
 			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 				<li class="nav-item">
 					<a class="nav-link" href="{{ path("logout") }}">Se déconnecter</a>
