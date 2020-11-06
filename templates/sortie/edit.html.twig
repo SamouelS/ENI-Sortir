@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block navbar %}
+    {% include "inc/navbar.html.twig" %}
+{% endblock %}
+{% block title %}
+	Les sorties
+{% endblock %}
+{% block header %}
+	{% include "inc/header.html.twig" %}
+{% endblock %}
+{% block content %}
+    {{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button class="btn btn-primary" type="submit">Enregistrer</button>
+	{{ form_end(form) }}
+{% endblock %}
