@@ -96,7 +96,13 @@
 				{% endif %}
 					
 				<td>{{sortie.organisateur.nom}}</td>
-				<td><a href="{{ path("sortie_detail", {"id": sortie.id }) }}"><span class="oi oi-eye"></span></a> </td>
+				<td>
+					<a href="{{ path("sortie_detail", {"id": sortie.id }) }}"><button class="btn btn-info btn-sm"><span class="oi oi-eye"></span></button></a> 
+					{% if sortie.organisateur == app.user %}
+						<a href="{{ path("sortie_edit", {"id": sortie.id }) }}"><button class="btn btn-warning btn-sm">Modifier</button></a>
+					{% endif %}
+				
+				</td>
 
 			</tr>
 		{% endfor %}

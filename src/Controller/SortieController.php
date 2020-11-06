@@ -36,13 +36,35 @@ class SortieController extends AbstractController
         $form = $this->createForm(SortieType::class, $sortie);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {            
+        if ($form->isSubmitted() && $form->isValid()) {   
+            $etatRepo = $this->getDoctrine()->getRepository(Etat::class);  
+            $sortie->setEtat($etatRepo->find(1));   
             $em->persist($sortie);
             $em->flush();
             $this->addFlash('success', 'la sortie à bien été insérée ! ');
             return $this->redirectToRoute("home");
         }
         return $this->render('sortie/add.html.twig', [
+            "form" => $form->createView()
+        ]);
+    }
+    /**
+     * @Route("/sortie/edit/{id}", name="sortie_edit")
+     */
+    public function edit($id,EntityManagerInterface $em, Request $request): Response
+    {
+        $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($id);
+        $form = $this->createForm(SortieType::class, $sortie);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {            
+            $em->persist($sortie);
+            $em->flush();
+            $this->addFlash('success', 'la sortie à bien été insérée ! ');
+            return $this->redirectToRoute("home");
+        }
+        return $this->render('sortie/edit.html.twig', [
             "form" => $form->createView()
         ]);
     }
@@ -76,4 +98,5 @@ class SortieController extends AbstractController
 
         return $this->redirectToRoute("home");
     }
+    
 }

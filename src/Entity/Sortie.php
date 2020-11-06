@@ -234,11 +234,11 @@ class Sortie
         $this->participants = $participants;
     }
 
-    public function isParticipant($user){
+    // public function isParticipant($user){
 
-        return $this->participants->contains($user);
+    //     return $this->participants->contains($user);
 
-    }
+    // }
     public function removeParticipant($participant)
     {
         if ($this->participants->contains($participant)) {
