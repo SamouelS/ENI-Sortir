@@ -65,7 +65,7 @@
 		</div>
 
 
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btesttn-primary">Submit</button>
 	</form>
 
 	<table class="table table-striped">
@@ -85,9 +85,9 @@
 		{% for sortie in sorties %}
 			<tr>
 				<td>{{sortie.nom}}</td>
-				<td>{{sortie.dateHeureDebut|date('Y-m-d')}}</td>
-				<td>{{sortie.dateLimiteInscription|date('Y-m-d')}}</td>
-				<td>{{sortie.nbInscriptionsMax}}</td>
+				<td>{{sortie.dateHeureDebut|date('d/m/Y')}}</td>
+				<td>{{sortie.dateLimiteInscription|date('d/m/Y')}}</td>
+				<td>{{ sortie.getParticipants()|length }}/{{sortie.nbInscriptionsMax}}</td>
 				<td>{{sortie.etat.libelle}}</td>
 				{% if app.user in sortie.participants %}
 					<td><a href="{{path('sortie_unsubscribe', {'idSortie': sortie.id, 'idParticipant': app.user.id} )}}"><span class="oi oi-check"></span></a></td>

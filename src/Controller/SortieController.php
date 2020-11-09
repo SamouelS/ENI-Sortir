@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -77,10 +78,22 @@ class SortieController extends AbstractController
         $participant = $particiapantRepo->find($idParticipant);
         $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepo->find($idSortie);
+
+        if($sortie->getDateLimiteInscription() < new DateTime()) {
+            $this->addFlash('danger', 'Les inscriptions sont clôturées pour la sortie'.$sortie->getNom().'"');
+            return $this->redirectToRoute("home");
+        }
+
+        if(count($sortie->getParticipants()) >= $sortie->getNbInscriptionsMax()) {
+            $this->addFlash('danger', 'Le nombre maximum de participants a déjà été atteint pour la sortie "'.$sortie->getNom().'"');
+            return $this->redirectToRoute("home");
+        }
+
         $sortie->getParticipants()->add($participant);
         $em->persist($sortie);
         $em->flush();
 
+        $this->addFlash('success', 'Vous êtes inscrit à la sortie "'.$sortie->getNom().'"');
         return $this->redirectToRoute("home");
     }
     /**
@@ -96,6 +109,7 @@ class SortieController extends AbstractController
         $em->persist($sortie);
         $em->flush();
 
+        $this->addFlash('success', 'Vous vous êtes désinscrit de la sortie "'.$sortie->getNom().'"');
         return $this->redirectToRoute("home");
     }
     
