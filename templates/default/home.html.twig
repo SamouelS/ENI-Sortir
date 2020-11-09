@@ -6,7 +6,26 @@
 {% block header %}{% endblock %}
 {% block content %}
 
-	<form class="form">
+	{{ form_start(form) }}
+
+	<div class="row">
+        <div class="col-6">
+            {{ form_row(form.campus) }}
+			{{ form_row(form.like) }}
+			{{ form_row(form.dateDebut) }}
+			{{ form_row(form.dateFin) }}
+        </div>
+        <div class="col-6">
+            {{ form_row(form.etreOrganisateur) }}
+			{{ form_row(form.etreInscrit) }}
+			{{ form_row(form.pasInscrit) }}
+			{{ form_row(form.passer) }}
+        </div>
+    </div>
+
+	<button class="btn btn-primary" type="submit">Rechercher</button>
+	{{ form_end(form) }}
+	{# <form class="form">
 		<div class="row">
 			<div class="col-6">
 				<div class="input-group">
@@ -66,7 +85,7 @@
 
 
 		<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
+	</form> #}
 
 	<table class="table table-striped">
 		<thead class="thead-dark">

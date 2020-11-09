@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,19 +17,85 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SortieRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $user;
+    public function __construct(ManagerRegistry $registry, Security $security)
     {
         parent::__construct($registry, Sortie::class);
+        $this->user = $security->getUser();
     }
     public function findAllOrderByCampus(){
         $query = $this->createQueryBuilder('s')
             ->join('s.campus','c')
             ->addOrderBy('c.nom')
-            ->addSelect('c')
-            ->getQuery()
-            
+            ->addSelect('c')     
         ;
-        return $query->getResult();
+        return $query->getQuery()->getResult();
+    }
+
+    public function findByFilter($sortieFilter){
+        dump($sortieFilter);
+        //die;
+        $query = $this->createQueryBuilder('s')
+            ->join('s.campus','c')
+            ->leftJoin('s.participants','p')
+            ->join('s.etat','e')
+            ->addOrderBy('c.nom')
+            ->addSelect('c')   
+            ->addSelect('p')  
+            //->addSelect('e')
+        ;
+        if (!empty( $sortieFilter->getCampus()) ) {
+            $query->andWhere('c = :campus')
+                ->setParameter('campus', $sortieFilter->getCampus())
+            ;
+        }
+        if (!empty( $sortieFilter->getLike() ) ) {
+            $query->andWhere('s.nom LIKE :like')
+                ->setParameter('like', '%'.$sortieFilter->getLike().'%')
+            ;
+        }
+        if (!empty( $sortieFilter->getDateDebut() ) ) {
+
+            $query->andWhere('s.dateHeureDebut >= :dateDebut')
+                ->setParameter('dateDebut', $sortieFilter->getDateDebut())
+            ;
+        }
+        if (!empty( $sortieFilter->getDateFin() ) ) {
+            $query->andWhere('s.dateHeureDebut <= :dateFin')
+                ->setParameter('dateFin', $sortieFilter->getDateFin())
+            ;
+        }
+
+        if ($sortieFilter->getEtreOrganisateur() ) {
+            $query->andWhere('s.organisateur = :user')
+                ->setParameter('user', $this->user)
+            ;
+        }
+        if ($sortieFilter->getEtreInscrit() ) {
+            $query->andWhere('p = :user')
+                ->setParameter('user', $this->user)
+            ;
+        }
+        if ($sortieFilter->getPasInscrit() ) {
+            dump('3');
+            $query2 = $this->createQueryBuilder('s2')
+                ->select('s2.id')
+                ->join('s2.participants', 'p2')
+                ->where('p2 = :unParticipant');
+
+            $query->andWhere($query->expr()->notIn('s.id', $query2->getDQL()))
+                ->setParameter('unParticipant', $this->user)
+            ;
+
+
+            
+        }
+        if ($sortieFilter->getPasser() ) {
+            $query->andWhere('e.id = 4');
+        }
+        dump($query->getParameters());
+        dump($query->getDQL());
+        return $query->getQuery()->getResult();
     }
 
     // /**
