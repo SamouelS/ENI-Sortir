@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
-use App\Entity\Participant;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,10 +40,11 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {   
             $etatRepo = $this->getDoctrine()->getRepository(Etat::class);  
-            $sortie->setEtat($etatRepo->find(1));   
+            $sortie->setEtat($etatRepo->find(1));
+            $sortie->setOrganisateur($this->getUser());
             $em->persist($sortie);
             $em->flush();
-            $this->addFlash('success', 'la sortie à bien été insérée ! ');
+            $this->addFlash('success', 'La sortie a bien été insérée ! ');
             return $this->redirectToRoute("home");
         }
         return $this->render('sortie/add.html.twig', [
@@ -62,7 +64,7 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {            
             $em->persist($sortie);
             $em->flush();
-            $this->addFlash('success', 'la sortie à bien été insérée ! ');
+            $this->addFlash('success', 'La sortie a bien été modifiée ! ');
             return $this->redirectToRoute("home");
         }
         return $this->render('sortie/edit.html.twig', [
@@ -78,10 +80,22 @@ class SortieController extends AbstractController
         $participant = $particiapantRepo->find($idParticipant);
         $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
         $sortie = $sortieRepo->find($idSortie);
+
+        if($sortie->getDateLimiteInscription() < new DateTime()) {
+            $this->addFlash('danger', 'Les inscriptions sont clôturées pour la sortie'.$sortie->getNom().'"');
+            return $this->redirectToRoute("home");
+        }
+
+        if(count($sortie->getParticipants()) >= $sortie->getNbInscriptionsMax()) {
+            $this->addFlash('danger', 'Le nombre maximum de participants a déjà été atteint pour la sortie "'.$sortie->getNom().'"');
+            return $this->redirectToRoute("home");
+        }
+
         $sortie->getParticipants()->add($participant);
         $em->persist($sortie);
         $em->flush();
 
+        $this->addFlash('success', 'Vous êtes inscrit à la sortie "'.$sortie->getNom().'"');
         return $this->redirectToRoute("home");
     }
     /**
@@ -97,6 +111,7 @@ class SortieController extends AbstractController
         $em->persist($sortie);
         $em->flush();
 
+        $this->addFlash('success', 'Vous vous êtes désinscrit de la sortie "'.$sortie->getNom().'"');
         return $this->redirectToRoute("home");
     }
     

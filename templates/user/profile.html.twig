@@ -33,8 +33,6 @@
                                                 <span class="badge badge-danger">Administrateur</span>
                                             {% endif %}
                                         </h2>
-                                        <h6 class="d-block"><a href="javascript:void(0)">0</a> sorties organisées</h6>
-                                        <h6 class="d-block"><a href="javascript:void(0)">0</a> sorties participées</h6>
                                         <hr />
                                         {% if user.getId() == app.user.id %}
                                             <a class="btn btn-primary" href="{{ path('user_profile_edit') }}">Modifier mon profil</a>
