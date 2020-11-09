@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
@@ -39,10 +40,11 @@ class SortieController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {   
             $etatRepo = $this->getDoctrine()->getRepository(Etat::class);  
-            $sortie->setEtat($etatRepo->find(1));   
+            $sortie->setEtat($etatRepo->find(1));
+            $sortie->setOrganisateur($this->getUser());
             $em->persist($sortie);
             $em->flush();
-            $this->addFlash('success', 'la sortie à bien été insérée ! ');
+            $this->addFlash('success', 'La sortie a bien été insérée ! ');
             return $this->redirectToRoute("home");
         }
         return $this->render('sortie/add.html.twig', [
@@ -62,7 +64,7 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {            
             $em->persist($sortie);
             $em->flush();
-            $this->addFlash('success', 'la sortie à bien été insérée ! ');
+            $this->addFlash('success', 'La sortie a bien été modifiée ! ');
             return $this->redirectToRoute("home");
         }
         return $this->render('sortie/edit.html.twig', [

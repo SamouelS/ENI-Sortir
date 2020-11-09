@@ -8,9 +8,11 @@ use App\Entity\Campus;
 use App\Entity\Sortie;
 use App\Entity\Participant;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\Route;
 
 class SortieType extends AbstractType
 {
@@ -26,10 +28,6 @@ class SortieType extends AbstractType
             ->add('lieu', EntityType::class, [
                 'choice_label' => 'nom',
                 'class'=>Lieu::class
-            ])
-            ->add('organisateur', EntityType::class, [
-                'choice_label' => 'nom',
-                'class'=>Participant::class
             ])
             ->add('campus', EntityType::class, [
                 'choice_label' => 'nom',
