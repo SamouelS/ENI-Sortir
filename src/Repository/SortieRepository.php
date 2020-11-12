@@ -33,8 +33,6 @@ class SortieRepository extends ServiceEntityRepository
     }
 
     public function findByFilter($sortieFilter){
-        dump($sortieFilter);
-        //die;
         $query = $this->createQueryBuilder('s')
             ->join('s.campus','c')
             ->leftJoin('s.participants','p')
@@ -93,8 +91,6 @@ class SortieRepository extends ServiceEntityRepository
         if ($sortieFilter->getPasser() ) {
             $query->andWhere('e.id = 4');
         }
-        dump($query->getParameters());
-        dump($query->getDQL());
         return $query->getQuery()->getResult();
     }
 

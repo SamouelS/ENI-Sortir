@@ -17,6 +17,7 @@ class DefaultController extends AbstractController
      */
     public function home(Request $request): Response
     {
+
         $sortieFilter = new SortieFilter();
         $form = $this->createForm(SortieFilterType::class, $sortieFilter);
 

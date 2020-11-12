@@ -12,5 +12,6 @@
     {{ form_start(form) }}
 	{{ form_widget(form) }}
 	<button class="btn btn-primary" type="submit">Enregistrer</button>
+	<a href="{{ path("sortie_cancel", {"id": sortie.id }) }}" class="btn btn-danger">Annuler</a>
 	{{ form_end(form) }}
 {% endblock %}

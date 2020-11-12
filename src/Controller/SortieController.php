@@ -68,7 +68,8 @@ class SortieController extends AbstractController
             return $this->redirectToRoute("home");
         }
         return $this->render('sortie/edit.html.twig', [
-            "form" => $form->createView()
+            "form" => $form->createView(),
+            "sortie" => $sortie,
         ]);
     }
     /**
@@ -114,5 +115,39 @@ class SortieController extends AbstractController
         $this->addFlash('success', 'Vous vous êtes désinscrit de la sortie "'.$sortie->getNom().'"');
         return $this->redirectToRoute("home");
     }
-    
+    /**
+     * @Route("/sortie/cancel/{id}", name="sortie_cancel", requirements={"idSortie": "\d+"})
+     */
+    public function cancel($id, EntityManagerInterface $em): Response
+    {
+        $etatRepo = $this->getDoctrine()->getRepository(Etat::class);
+        $etat = $etatRepo->find(5);
+        $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($id);
+        $sortie->setEtat($etat);
+        $em->persist($sortie);
+        $em->flush();
+
+        $this->addFlash('success', 'Vous vous avez annuler la sortie "'.$sortie->getNom().'"');
+        return $this->redirectToRoute("home");
+    }
+
+    public function checkEtat($sorties, EntityManagerInterface $em){
+        $dateNow = new \DateTime();
+        $modif = false;
+        $etatRepo = $this->getDoctrine()->getRepository(Etat::class);
+        $etatArchive = $etatRepo->find(7);
+        foreach ($sorties as $sortie) {
+            if($sortie->getDateHeureDebut()< $dateNow->add(new \DateInterval('P1M')) && $sortie->getEtat()->getId() != 7){
+                $sortie->setEtat($etatArchive);
+                $modif = true;
+                
+            }
+            if ($modif) {
+                $em->persist($sortie);
+                $em->flush();
+            }
+        }
+        return $sorties;
+    }
 }

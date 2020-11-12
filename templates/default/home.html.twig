@@ -102,6 +102,7 @@
 		</thead>
 		<tbody>
 		{% for sortie in sorties %}
+		
 			<tr>
 				<td>{{sortie.nom}}</td>
 				<td>{{sortie.dateHeureDebut|date('d/m/Y')}}</td>
@@ -117,7 +118,7 @@
 				<td>{{sortie.organisateur.nom}}</td>
 				<td>
 					<a href="{{ path("sortie_detail", {"id": sortie.id }) }}"><button class="btn btn-info btn-sm"><span class="oi oi-eye"></span></button></a> 
-					{% if sortie.organisateur == app.user %}
+					{% if sortie.organisateur == app.user or app.user.administrateur %}
 						<a href="{{ path("sortie_edit", {"id": sortie.id }) }}"><button class="btn btn-warning btn-sm">Modifier</button></a>
 					{% endif %}
 				

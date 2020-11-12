@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
-use DateInterval;
 use DateTime;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use DateInterval;
+use App\Entity\Sortie;
+use PhpParser\Node\Expr\New_;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TestController extends AbstractController
 {
@@ -15,8 +17,17 @@ class TestController extends AbstractController
      */
     public function index(): Response
     {
-        $date = new DateTime();
-        dump($date->add(new DateInterval("P1D")));
+
+
+        $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
+        $sorties = $sortieRepo->findAllOrderByCampus();
+        $dateNow = new \DateTime();
+        foreach ($sorties as $sortie) {
+            if($sortie->getDateHeureDebut()< $dateNow->add(new DateInterval('P1M')) && $sortie->getEtat()->getId() != 7){
+                dump('ok');
+            }
+        }
+        dump($sorties);
         die;
         return $this->render('test/index.html.twig', [
             'controller_name' => 'TestController',
