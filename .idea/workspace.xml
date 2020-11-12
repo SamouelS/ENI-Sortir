@@ -25,15 +25,19 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e9124dd-3110-46bb-b29d-dac822ca357e" name="Default Changelist" comment="Ajout dépendance MAKE">
-      <change beforePath="$PROJECT_DIR$/src/Entity/Ville.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Ville.php" afterDir="false" />
+    <list default="true" id="9e9124dd-3110-46bb-b29d-dac822ca357e" name="Default Changelist" comment="FRONT detail sortie">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <list id="484ac2f8-c647-46ff-902d-27212cdc8cb4" name="Do nothing" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/eni-sortir.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/eni-sortir.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -118,6 +122,14 @@
       <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/apache-pack" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-guard" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
+      <path value="$PROJECT_DIR$/vendor/league/color-extractor" />
+      <path value="$PROJECT_DIR$/vendor/claviska/simpleimage" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jjNDximUyY1AvSzZN6beSxwy0u" />
@@ -127,20 +139,34 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="9e9124dd-3110-46bb-b29d-dac822ca357e" name="Default Changelist" comment="" />
+      <changelist id="484ac2f8-c647-46ff-902d-27212cdc8cb4" name="Do nothing" comment="" />
       <created>1604313427168</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604313427168</updated>
       <workItem from="1604313428565" duration="1030000" />
-      <workItem from="1604322746771" duration="8424000" />
+      <workItem from="1604322746771" duration="8951000" />
+      <workItem from="1604392229627" duration="11608000" />
+      <workItem from="1604409204015" duration="9656000" />
+      <workItem from="1604478921332" duration="588000" />
+      <workItem from="1604501582316" duration="6479000" />
+      <workItem from="1604572493273" duration="5292000" />
+      <workItem from="1604582016480" duration="8356000" />
+      <workItem from="1604674426552" duration="3435000" />
+      <workItem from="1604798837472" duration="597000" />
+      <workItem from="1604916512860" duration="946000" />
+      <workItem from="1604928257966" duration="10795000" />
+      <workItem from="1605197130840" duration="302000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout dépendance MAKE">
       <created>1604326474971</created>
@@ -163,7 +189,91 @@
       <option name="project" value="LOCAL" />
       <updated>1604329165946</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Création entités">
+      <created>1604333761519</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604333761519</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Ajout dependance apache-pack">
+      <created>1604393789814</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1604393789814</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Ajout page inscription">
+      <created>1604401214879</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1604401214879</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Ajout connexion">
+      <created>1604416689051</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1604416689051</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Validation à l'inscription">
+      <created>1604417546059</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1604417546059</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Profil + avatar">
+      <created>1604507741269</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1604507741269</updated>
+    </task>
+    <task id="LOCAL-00010" summary="modification mot de passe sur editer profil">
+      <created>1604582100554</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1604582100554</updated>
+    </task>
+    <task id="LOCAL-00011" summary="FRONT page profil + login">
+      <created>1604586054020</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1604586054020</updated>
+    </task>
+    <task id="LOCAL-00012" summary="FRONT detail sortie">
+      <created>1604589287752</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1604589287752</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Gestion du rôle admin">
+      <created>1604677241064</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1604677241064</updated>
+    </task>
+    <task id="LOCAL-00014" summary="2-5_Clôture des inscriptions date + nb max participants">
+      <created>1604930856409</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1604930856409</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Ajout lieu suppression champ &quot;organisateur&quot; à la création d'une sortie">
+      <created>1604937250042</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1604937250042</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,35 +301,72 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Ajout dépendance MAKE" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout dépendance MAKE" />
+    <MESSAGE value="Création entités" />
+    <MESSAGE value="Ajout dependance apache-pack" />
+    <MESSAGE value="Ajout page inscription" />
+    <MESSAGE value="Ajout connexion" />
+    <MESSAGE value="Validation à l'inscription" />
+    <MESSAGE value="Profil + avatar" />
+    <MESSAGE value="modification mot de passe sur editer profil" />
+    <MESSAGE value="FRONT page profil + login" />
+    <MESSAGE value="FRONT detail sortie" />
+    <MESSAGE value="Gestion du rôle admin" />
+    <MESSAGE value="2-5_Clôture des inscriptions date + nb max participants" />
+    <MESSAGE value="Ajout lieu suppression champ &quot;organisateur&quot; à la création d'une sortie" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout lieu suppression champ &quot;organisateur&quot; à la création d'une sortie" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="753" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1604333606339">
+    <state x="753" y="228" key="#com.intellij.ide.util.MemberChooser" timestamp="1604506276420">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="753" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1604333606339" />
+    <state x="753" y="228" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1604506276420" />
+    <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604934385444">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="274" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604934385444" />
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1604328974121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604328974121" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1604329180473">
+    <state x="184" y="86" key="MergeDialog" timestamp="1604677372263">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604329180473" />
+    <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604677372263" />
+    <state x="598" y="281" key="MultipleFileMergeDialog" timestamp="1604677378052">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="598" y="281" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604677378052" />
+    <state x="790" y="389" key="VCS.EditChangelistDialog" timestamp="1604394652486">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="790" y="389" key="VCS.EditChangelistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604394652486" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1604937254904">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604937254904" />
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1604327368116">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604327368116" />
-    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604329412500">
+    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604937913837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604329412500" />
+    <state x="777" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1604937913837" />
+    <state x="861" y="252" width="585" height="534" key="find.popup" timestamp="1604938176136">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="861" y="252" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604938176136" />
     <state x="761" y="426" width="554" height="198" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1604313704968">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="761" y="426" width="554" height="198" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604313704968" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1604399416965">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604399416965" />
   </component>
 </project>
