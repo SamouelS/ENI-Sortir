@@ -55,11 +55,15 @@ class DefaultController extends AbstractController
         $etatRepo = $this->getDoctrine()->getRepository(Etat::class);
         $etatArchive = $etatRepo->find(7);
         $etatCloture = $etatRepo->find(6);
-
+        $etatOuverte = $etatRepo->find(2);
         
         foreach ($sorties as $sortie) {
             $modif = false;
             
+            if($sortie->getDateLimiteInscription()>$dateNow && $sortie->getEtat()->getId() != 2){
+                $sortie->setEtat($etatOuverte);
+                $modif = true;
+            }
             if($sortie->getDateLimiteInscription()<$dateNow && $sortie->getEtat()->getId() != 6 && $sortie->getEtat()->getId() != 7){
                 $sortie->setEtat($etatCloture);
                 $modif = true;
