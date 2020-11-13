@@ -60,7 +60,7 @@ class DefaultController extends AbstractController
         foreach ($sorties as $sortie) {
             $modif = false;
             
-            if($sortie->getDateLimiteInscription()>$dateNow && $sortie->getEtat()->getId() != 2){
+            if($sortie->getDateLimiteInscription()>$dateNow && $sortie->getEtat()->getId() != 2 && $sortie->getEtat()->getId() != 6 && $sortie->getEtat()->getId() != 7){
                 $sortie->setEtat($etatOuverte);
                 $modif = true;
             }
