@@ -56,27 +56,44 @@ class DefaultController extends AbstractController
         $etatArchive = $etatRepo->find(7);
         $etatCloture = $etatRepo->find(6);
         $etatOuverte = $etatRepo->find(2);
-        
+        $etatEnCours = $etatRepo->find(3);
+        $etatPassee = $etatRepo->find(4);
         foreach ($sorties as $sortie) {
             $modif = false;
-            
-            if($sortie->getDateLimiteInscription()>$dateNow && $sortie->getEtat()->getId() != 2 && $sortie->getEtat()->getId() == 6 && $sortie->getEtat()->getId() != 7){
-                $sortie->setEtat($etatOuverte);
-                $modif = true;
-            }
-            if($sortie->getDateLimiteInscription()<$dateNow && $sortie->getEtat()->getId() != 6 && $sortie->getEtat()->getId() != 7){
-                $sortie->setEtat($etatCloture);
-                $modif = true;
-            }
-
-            if($dateNow->diff($sortie->getDateHeureDebut())->m >=1 && $sortie->getEtat()->getId() != 7){              
-                $sortie->setEtat($etatArchive);
-                $modif = true;  
-            }
-            
-            if ($modif) {
-                $em->persist($sortie);
-                $em->flush();
+            $heure = $sortie->getDuree()->format('H');
+            $minute = $sortie->getDuree()->format('s');
+            $dateClone = clone $sortie->getDateHeureDebut();
+            // dump($sortie->getDateHeureDebut());
+            // dump($dateClone->add(new DateInterval('PT'.$heure.'H'.$minute.'M')));
+            // dump($sortie->getDateHeureDebut());
+            // die;
+            if($sortie->getEtat()->getId() != 5){
+                if($dateNow > $sortie->getDateHeureDebut() && $dateNow < $dateClone->add(new DateInterval('PT'.$heure.'H'.$minute.'M'))){
+                    $sortie->setEtat($etatEnCours);
+                    $modif = true;
+                }
+                if($dateNow > $dateClone->add(new DateInterval('PT'.$heure.'H'.$minute.'M')) && $sortie->getEtat()->getId() != 7){
+                    $sortie->setEtat($etatPassee);
+                    $modif = true;   
+                }
+                if($sortie->getDateLimiteInscription()>$dateNow && $sortie->getEtat()->getId() != 2 && $sortie->getEtat()->getId() == 6 && $sortie->getEtat()->getId() != 7){
+                    $sortie->setEtat($etatOuverte);
+                    $modif = true;
+                }
+                if($sortie->getDateLimiteInscription()<$dateNow && $sortie->getEtat()->getId() != 6 && $sortie->getEtat()->getId() != 7 && $sortie->getEtat()->getId() != 3  && $sortie->getEtat()->getId() != 4){
+                    $sortie->setEtat($etatCloture);
+                    $modif = true;
+                }
+    
+                if($dateNow->diff($sortie->getDateHeureDebut())->m >=1 && $sortie->getEtat()->getId() != 7){              
+                    $sortie->setEtat($etatArchive);
+                    $modif = true;  
+                }
+                
+                if ($modif) {
+                    $em->persist($sortie);
+                    $em->flush();
+                }
             }
         }
         return $sorties;
