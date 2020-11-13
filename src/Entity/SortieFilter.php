@@ -11,6 +11,7 @@ class SortieFilter
     private $etreInscrit;
     private $pasInscrit;
     private $passer;
+    private $archiver;
 
     
 
@@ -174,4 +175,24 @@ class SortieFilter
         return $this;
     }
 
+
+    /**
+     * Get the value of archiver
+     */ 
+    public function getArchiver()
+    {
+        return $this->archiver;
+    }
+
+    /**
+     * Set the value of archiver
+     *
+     * @return  self
+     */ 
+    public function setArchiver($archiver)
+    {
+        $this->archiver = $archiver;
+
+        return $this;
+    }
 }

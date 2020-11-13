@@ -12,6 +12,9 @@
     {{ form_start(form) }}
 	{{ form_widget(form) }}
 	<button class="btn btn-primary" type="submit">Enregistrer</button>
-	<a href="{{ path("sortie_cancel", {"id": sortie.id }) }}" class="btn btn-danger">Annuler</a>
+	{% if sortie.etat.id == 1 %}
+		<a href="{{ path("sortie_publish", {"id": sortie.id }) }}" class="btn btn-info">Publier la sortie</a>
+	{% endif %}
+	<a href="{{ path("sortie_cancel", {"id": sortie.id }) }}" class="btn btn-danger">Annuler la sortie</a>
 	{{ form_end(form) }}
 {% endblock %}

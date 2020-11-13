@@ -24,6 +24,7 @@ class SortieFilterType extends AbstractType
                 'class'=>Campus::class,
                 "placeholder" => "tous",      
                 'required' => false,   
+                'label' => 'Campus :  '
             ])
             ->add('like', TextType::class, [  
                 'label' => 'Le nom de la sortie contient :',  
@@ -34,11 +35,13 @@ class SortieFilterType extends AbstractType
             ])
             ->add('dateDebut', DateType::class, [  
                 'label' => 'Entre',  
-                'required' => false,             
+                'required' => false,
+         
             ])
             ->add('dateFin', DateType::class, [  
                 'label' => 'et',  
-                'required' => false,             
+                'required' => false,  
+             
             ])
             ->add('etreOrganisateur', CheckboxType::class, [  
                 'label' => 'Sorties dont je suis l\'organisateur',  
@@ -49,11 +52,15 @@ class SortieFilterType extends AbstractType
                 'required' => false,             
             ])
             ->add('pasInscrit', CheckboxType::class, [  
-                'label' => 'Sorties dont je ne suis pas isncrit',  
+                'label' => 'Sorties dont je ne suis pas inscrit',  
                 'required' => false,             
             ])
             ->add('passer', CheckboxType::class, [  
                 'label' => 'Sorties passées',  
+                'required' => false,             
+            ])
+            ->add('archiver', CheckboxType::class, [  
+                'label' => 'Sorties archivée',  
                 'required' => false,             
             ])
         ;

@@ -26,8 +26,10 @@ class SortieRepository extends ServiceEntityRepository
     public function findAllOrderByCampus(){
         $query = $this->createQueryBuilder('s')
             ->join('s.campus','c')
+            ->join('s.etat','e')
             ->addOrderBy('c.nom')
-            ->addSelect('c')     
+            ->addSelect('c') 
+            ->andWhere('e.id != 7')    
         ;
         return $query->getQuery()->getResult();
     }
@@ -38,9 +40,10 @@ class SortieRepository extends ServiceEntityRepository
             ->leftJoin('s.participants','p')
             ->join('s.etat','e')
             ->addOrderBy('c.nom')
-            ->addSelect('c')   
-            ->addSelect('p')  
-            //->addSelect('e')
+            
+            // ->addSelect('c')   
+            // ->addSelect('p')  
+            // //->addSelect('e')
         ;
         if (!empty( $sortieFilter->getCampus()) ) {
             $query->andWhere('c = :campus')
@@ -90,6 +93,11 @@ class SortieRepository extends ServiceEntityRepository
         }
         if ($sortieFilter->getPasser() ) {
             $query->andWhere('e.id = 4');
+        }
+        if ($sortieFilter->getArchiver() ) {
+            $query->andWhere('e.id = 7');
+        }else{
+            $query->andWhere('e.id != 7');
         }
         return $query->getQuery()->getResult();
     }

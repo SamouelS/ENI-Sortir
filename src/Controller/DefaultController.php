@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use DateInterval;
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Entity\SortieFilter;
 use App\Form\SortieFilterType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends AbstractController
 {
@@ -23,7 +26,7 @@ class DefaultController extends AbstractController
 
         $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
         $sorties = $sortieRepo->findAllOrderByCampus();
-        
+        $sorties = $this->checkEtat($sorties);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {   
             $sorties = $sortieRepo->findByFilter($sortieFilter);
@@ -44,5 +47,34 @@ class DefaultController extends AbstractController
         
 
 
+    }
+    public function checkEtat($sorties){
+        $em = $this->getDoctrine()->getManager();
+
+        $dateNow = new \DateTime();
+        $etatRepo = $this->getDoctrine()->getRepository(Etat::class);
+        $etatArchive = $etatRepo->find(7);
+        $etatCloture = $etatRepo->find(6);
+
+        
+        foreach ($sorties as $sortie) {
+            $modif = false;
+            
+            if($sortie->getDateLimiteInscription()<$dateNow && $sortie->getEtat()->getId() != 6 && $sortie->getEtat()->getId() != 7){
+                $sortie->setEtat($etatCloture);
+                $modif = true;
+            }
+
+            if($dateNow->diff($sortie->getDateHeureDebut())->m >=1 && $sortie->getEtat()->getId() != 7){              
+                $sortie->setEtat($etatArchive);
+                $modif = true;  
+            }
+            
+            if ($modif) {
+                $em->persist($sortie);
+                $em->flush();
+            }
+        }
+        return $sorties;
     }
 }

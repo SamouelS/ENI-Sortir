@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseLogin.html.twig' %}
 
 {% block navbar %}
     {% include "inc/navbar.html.twig" %}
@@ -10,8 +10,9 @@
                 {% if error %}
                     <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
-                <div class="card">
+                <div class="card col-6 offset-3">
                     <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Connexion</h2>
                         <form action="{{ path('login') }}" method="post">
                             <div class="form-group row">
                                 <label for="email_address" class="col-md-4 col-form-label text-md-right">Adresse mail</label>

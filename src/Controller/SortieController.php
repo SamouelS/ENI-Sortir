@@ -61,7 +61,7 @@ class SortieController extends AbstractController
         $form = $this->createForm(SortieType::class, $sortie);
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {            
+        if ($form->isSubmitted() && $form->isValid()) {          
             $em->persist($sortie);
             $em->flush();
             $this->addFlash('success', 'La sortie a bien été modifiée ! ');
@@ -116,7 +116,7 @@ class SortieController extends AbstractController
         return $this->redirectToRoute("home");
     }
     /**
-     * @Route("/sortie/cancel/{id}", name="sortie_cancel", requirements={"idSortie": "\d+"})
+     * @Route("/sortie/cancel/{id}", name="sortie_cancel", requirements={"id": "\d+"})
      */
     public function cancel($id, EntityManagerInterface $em): Response
     {
@@ -128,26 +128,23 @@ class SortieController extends AbstractController
         $em->persist($sortie);
         $em->flush();
 
-        $this->addFlash('success', 'Vous vous avez annuler la sortie "'.$sortie->getNom().'"');
+        $this->addFlash('success', 'Vous vous avez annulé la sortie "'.$sortie->getNom().'"');
         return $this->redirectToRoute("home");
     }
-
-    public function checkEtat($sorties, EntityManagerInterface $em){
-        $dateNow = new \DateTime();
-        $modif = false;
+    /**
+     * @Route("/sortie/publish/{id}", name="sortie_publish", requirements={"id": "\d+"})
+     */
+    public function publish($id, EntityManagerInterface $em): Response
+    {
         $etatRepo = $this->getDoctrine()->getRepository(Etat::class);
-        $etatArchive = $etatRepo->find(7);
-        foreach ($sorties as $sortie) {
-            if($sortie->getDateHeureDebut()< $dateNow->add(new \DateInterval('P1M')) && $sortie->getEtat()->getId() != 7){
-                $sortie->setEtat($etatArchive);
-                $modif = true;
-                
-            }
-            if ($modif) {
-                $em->persist($sortie);
-                $em->flush();
-            }
-        }
-        return $sorties;
+        $etat = $etatRepo->find(2);
+        $sortieRepo = $this->getDoctrine()->getRepository(Sortie::class);
+        $sortie = $sortieRepo->find($id);
+        $sortie->setEtat($etat);
+        $em->persist($sortie);
+        $em->flush();
+
+        $this->addFlash('success', 'Vous vous avez publié la sortie "'.$sortie->getNom().'"');
+        return $this->redirectToRoute("home");
     }
 }

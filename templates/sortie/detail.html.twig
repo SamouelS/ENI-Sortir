@@ -103,18 +103,21 @@
     </div>
     <hr>
     <span class="font-weight-bold">Actions</span><br>
+    <a href="{{ path("home") }}"><button class="btn btn-info">Retour</button></a>
     {% if app.user in sortie.participants %}
         <td><a class="btn btn-primary" href="{{path('sortie_unsubscribe', {'idSortie': sortie.id, 'idParticipant': app.user.id} )}}">Se désister</a></td>
     {% else %}
         {% if sortie.participants|length >= sortie.getNbInscriptionsMax() or "now"|date("d/m/Y") > sortie.getDateLimiteInscription()|date("d/m/Y") %}
-            <td><a class="btn btn-secondary" href="#" disabled>S'inscrire</a></td>
+            {# <td><a class="btn btn-secondary" href="#" disabled>S'inscrire</a></td> #}
         {% else %}
             <td><a class="btn btn-primary" href="{{path('sortie_register', {'idSortie': sortie.id, 'idParticipant': app.user.id} )}}">S'inscrire</a></td>
         {% endif %}
     {% endif %}
+    {% if sortie.organisateur == app.user or app.user.administrateur %}
+        <a href="{{ path("sortie_edit", {"id": sortie.id }) }}"><button class="btn btn-warning">Modifier</button></a>
 
-<button type="button" class="btn btn-secondary">Secondary</button>
-<button type="button" class="btn btn-success">Success</button>
+    {% endif %}
+
 
     
 {% endblock %}
