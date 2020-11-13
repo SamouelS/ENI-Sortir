@@ -16,5 +16,6 @@
 		<a href="{{ path("sortie_publish", {"id": sortie.id }) }}" class="btn btn-info">Publier la sortie</a>
 	{% endif %}
 	<a href="{{ path("sortie_cancel", {"id": sortie.id }) }}" class="btn btn-danger">Annuler la sortie</a>
+	<a href="{{ path("home") }}" class="btn btn-warning">Retour à l'accueil</a>
 	{{ form_end(form) }}
 {% endblock %}
